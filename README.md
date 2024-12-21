@@ -1,12 +1,6 @@
 # nedo2024
 Motion Decoding Using Biosignals Skateboarder Center of Gravity Prediction Challenge, 5th solution
 
-# Readme
-
-本ファイル(`readme.md`)で, 送付データの説明を付与したドキュメント。
-マークダウン形式で、プレビューモードで見ることを推奨する。
-
-
 # データの配置
 
 .ipnybファイルと同じ階層に"dataset","output"フォルダを作成する。
@@ -23,15 +17,11 @@ Motion Decoding Using Biosignals Skateboarder Center of Gravity Prediction Chall
 
 #### 8227_ImageFeature-Effnetb0TorchV
 
-```
 efficientnetb0で速度ベクトルを学習・推論するモデル
-```
 
 #### 8248_ImageFeature-Effnetb0TorchV_EvalGMM
 
-```
 8227で推論した速度ベクトルを3クラスに分類するモデル
-```
 
 ## 2_2段目モデル
 
@@ -48,21 +38,15 @@ b0のモデルを基本とし、モデルの多様性を持たせるために、
 
 #### 2-1_通常モデル\\***
 
-```
 0001から0005のtrainデータで学習するモデル
-```
 
 #### 2-2_Test5追加モデル\\***
 
-```
 0001から0005のtrainデータと、0005のtestデータで学習するモデル
-```
 
 #### 2-3_User別モデル\\***
 
-```
 ユーザーID別に学習・推論するモデル　(例：0001の推論は、0001を学習した重みを用いる)。pretrainedとして、当該ユーザー以外のデータで学習。Augmentationで信号領域にノイズ付与。
-```
 
 ## 3_Stackingモデル
 
