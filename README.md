@@ -4,7 +4,7 @@ Motion Decoding Using Biosignals Skateboarder Center of Gravity Prediction Chall
 # データの配置
 .ipnybファイルと同じ階層に"dataset","output"フォルダを作成する。
 "dataset"には事務局配布のファイル一式（reference.mat、test.mat、train.mat、sample_submit.json）を格納する。
-提出モデルは、時系列データを画像化したデータで学習・推論する。.ipnybファイルを実行すると、"output"フォルダ下に実験名フォルダが生成され、その下に画像データ(.pkl)、モデルファイル(.pth)、学習曲線などを出力する。
+提出モデルは、時系列データを画像化したデータで学習・推論する。.ipnybファイルを実行すると、"output"フォルダ下に実験名フォルダが生成され、その下に画像データ(.pkl)、モデルファイル(.pth)を出力する。
 
 # モデルの構成
 
@@ -22,7 +22,7 @@ efficientnetb0で速度ベクトルを学習・推論するモデル
 
 3クラス分類のラベルを、画像中にメタ情報として埋め込み、学習・推論するモデル
 efficientnetb0,b1,b2,v2s,MaxVit,MobileNetV4の6種類をバックボーンに使用
-（b0のモデルを基本としいるが、多様性を持たせるために、他の5種類を追加している）
+（b0のモデルが基本。アンサンブルで多様性を持たせるために、他の5種類を追加。）
 
 モデル毎に画像サイズが異なる。b2やv2sでは画像サイズを合わせるために、256x256とは異なるデータ配置・埋込みをしている。
 - b0, b1, maxvit, mobilentv4は256x256の画像
@@ -30,6 +30,8 @@ efficientnetb0,b1,b2,v2s,MaxVit,MobileNetV4の6種類をバックボーンに使
 - v2sは384x384の画像を作成（簡易なssc, aacも埋込み)
     - Slope Sign Change (SSC): SSCは波形が符号を変更する回数、筋電位信号の変動を捉える。筋活動の変化が多いほどSSCの値は大きい。
     - Average Amplitude Change (AAC): AACは連続するサンプル間の振幅差の平均を計算。信号の変動性を評価。
+
+2段目モデルは学習データの切り方を変えて、以下の3つのモデルを使用
 
 #### 2-1_通常モデル\\***
 
@@ -45,5 +47,5 @@ efficientnetb0,b1,b2,v2s,MaxVit,MobileNetV4の6種類をバックボーンに使
 
 ## 3_Stackingモデル
 
-2_2段目モデルのOOF予測値を使い、Lasso回帰でStacking
+2_2段目モデルのOOF予測値を使い、Lasso回帰でStackingするモデル
 
